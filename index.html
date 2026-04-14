@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Can B. Kalayci | Academic Website</title>
+    <meta
+      name="description"
+      content="Academic website of Can B. Kalayci, Professor of Operations Research and Artificial Intelligence at Pamukkale University."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="site-frame">
+      <aside class="sidebar">
+        <img
+          class="profile-photo"
+          src="assets/can-b-kalayci.jpg"
+          alt="Portrait of Can B. Kalayci"
+        />
+        <h1 class="name">Can B. Kalayci</h1>
+        <p class="title" data-i18n="profile.title"></p>
+        <ul class="profile-list">
+          <li><a href="https://www.pau.edu.tr/cbkalayci" target="_blank" rel="noreferrer">Pamukkale University</a></li>
+          <li><a href="mailto:cbkalayci@pau.edu.tr">cbkalayci@pau.edu.tr</a></li>
+          <li><a href="https://scholar.google.com/citations?user=iHetZQAAAAJ" target="_blank" rel="noreferrer">Google Scholar</a></li>
+          <li><a href="https://orcid.org/0000-0003-2355-7015" target="_blank" rel="noreferrer">ORCID</a></li>
+          <li><a href="https://www.scopus.com/authid/detail.uri?authorId=54951330900" target="_blank" rel="noreferrer">Scopus</a></li>
+          <li><a href="https://www.linkedin.com/in/cbkalayci" target="_blank" rel="noreferrer">LinkedIn</a></li>
+        </ul>
+
+        <div class="lang-switcher" role="group" aria-label="Language switcher">
+          <button type="button" class="lang-button is-active" data-lang="en">EN</button>
+          <button type="button" class="lang-button" data-lang="tr">TR</button>
+        </div>
+
+        <p class="sidebar-note" data-i18n="profile.note"></p>
+      </aside>
+
+      <main class="content">
+        <header class="topbar">
+          <nav class="tabs" aria-label="Site sections">
+            <button type="button" class="tab-button is-active" data-tab="home" data-i18n="tabs.home"></button>
+            <button type="button" class="tab-button" data-tab="research" data-i18n="tabs.research"></button>
+            <button type="button" class="tab-button" data-tab="publications" data-i18n="tabs.publications"></button>
+            <button type="button" class="tab-button" data-tab="teaching" data-i18n="tabs.teaching"></button>
+            <button type="button" class="tab-button" data-tab="cv" data-i18n="tabs.cv"></button>
+          </nav>
+        </header>
+
+        <section class="tab-panel is-active" data-panel="home">
+          <div class="panel-card intro-card">
+            <p class="section-label" data-i18n="home.label"></p>
+            <h2 data-i18n="home.heading"></h2>
+            <p data-i18n="home.body1"></p>
+            <p data-i18n="home.body2"></p>
+          </div>
+
+          <div class="grid-two">
+            <article class="panel-card">
+              <p class="section-label" data-i18n="home.focusLabel"></p>
+              <div class="chip-list" id="focus-list"></div>
+            </article>
+
+            <article class="panel-card">
+              <p class="section-label" data-i18n="home.highlightsLabel"></p>
+              <ul class="compact-list" id="home-highlights"></ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="tab-panel" data-panel="research">
+          <div class="panel-card">
+            <p class="section-label" data-i18n="research.label"></p>
+            <h2 data-i18n="research.heading"></h2>
+            <p data-i18n="research.intro"></p>
+          </div>
+
+          <div class="grid-two">
+            <article class="panel-card">
+              <p class="section-label" data-i18n="research.projectsLabel"></p>
+              <div id="projects-list" class="stack-list"></div>
+            </article>
+            <article class="panel-card">
+              <p class="section-label" data-i18n="research.serviceLabel"></p>
+              <ul class="compact-list" id="service-list"></ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="tab-panel" data-panel="publications">
+          <div class="panel-card">
+            <div class="list-header">
+              <div>
+                <p class="section-label" data-i18n="publications.label"></p>
+                <h2 data-i18n="publications.heading"></h2>
+              </div>
+              <p class="count-pill"><span id="publication-count"></span> <span data-i18n="publications.countSuffix"></span></p>
+            </div>
+            <div id="publications-list" class="stack-list publication-stack"></div>
+          </div>
+        </section>
+
+        <section class="tab-panel" data-panel="teaching">
+          <div class="grid-two">
+            <article class="panel-card">
+              <p class="section-label" data-i18n="teaching.coursesLabel"></p>
+              <h2 data-i18n="teaching.heading"></h2>
+              <ul class="compact-list" id="courses-list"></ul>
+            </article>
+            <article class="panel-card">
+              <p class="section-label" data-i18n="teaching.supervisionLabel"></p>
+              <ul class="compact-list" id="supervision-list"></ul>
+            </article>
+          </div>
+
+          <div class="grid-two">
+            <article class="panel-card">
+              <p class="section-label" data-i18n="teaching.skillsLabel"></p>
+              <ul class="compact-list" id="skills-list"></ul>
+            </article>
+            <article class="panel-card">
+              <p class="section-label" data-i18n="teaching.languagesLabel"></p>
+              <ul class="compact-list" id="languages-list"></ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="tab-panel" data-panel="cv">
+          <div class="grid-two">
+            <article class="panel-card">
+              <p class="section-label" data-i18n="cv.educationLabel"></p>
+              <ul class="timeline" id="education-list"></ul>
+            </article>
+            <article class="panel-card">
+              <p class="section-label" data-i18n="cv.awardsLabel"></p>
+              <ul class="compact-list" id="awards-list"></ul>
+            </article>
+          </div>
+
+          <article class="panel-card">
+            <p class="section-label" data-i18n="cv.experienceLabel"></p>
+            <ul class="timeline" id="experience-list"></ul>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
