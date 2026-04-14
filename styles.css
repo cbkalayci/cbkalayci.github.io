@@ -109,6 +109,61 @@ button {
   border-bottom: 0;
 }
 
+.profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.platform-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 7px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.platform-pau {
+  background: #f4efe3;
+  color: #7d5d2a;
+}
+
+.platform-mail {
+  background: #f3ece8;
+  color: #8e4d3f;
+}
+
+.platform-scholar {
+  background: #ebf1fb;
+  color: #2f5bb3;
+}
+
+.platform-orcid {
+  background: #edf7ec;
+  color: #5a9d32;
+}
+
+.platform-scopus {
+  background: #fff1e8;
+  color: #e86d1f;
+}
+
+.platform-linkedin {
+  background: #eaf3fb;
+  color: #0a66c2;
+}
+
 .lang-switcher {
   display: inline-flex;
   gap: 8px;
