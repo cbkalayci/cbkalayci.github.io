@@ -241,7 +241,7 @@ const content = {
     ]
   },
   publications: [
-    ["2024","CMSA based on set covering models for packing and routing problems","Annals of Operations Research","https://doi.org/10.1007/s10479-024-05919-y"],
+    ["2024","CMSA based on set covering models for packing and routing problems","Annals of Operations Research","https://doi.org/10.1007/s10479-024-06295-9"],
     ["2020","A Parallel Variable Neighborhood Search Algorithm with Quadratic Programming for Cardinality Constrained Portfolio Optimization","Knowledge-Based Systems","https://doi.org/10.1016/j.knosys.2020.105944"],
     ["2021","A Variable Neighborhood Search Algorithm for Cost-Balanced Travelling Salesman Problem","Advances in Intelligent Systems and Computing","https://doi.org/10.1007/978-3-030-68520-1_3"],
     ["2022","Variable Neighborhood Search for the Two-Echelon Electric Vehicle Routing Problem with Time Windows","Applied Sciences","https://doi.org/10.3390/app12031014"],
@@ -442,7 +442,12 @@ function renderProjects() {
 function renderPublications() {
   const container = document.getElementById("publications-list");
   container.innerHTML = "";
-  content.publications.forEach(([year, title, venue, link]) => {
+  [...content.publications]
+    .sort((a, b) => {
+      const yearDiff = Number(b[0]) - Number(a[0]);
+      return yearDiff !== 0 ? yearDiff : a[1].localeCompare(b[1]);
+    })
+    .forEach(([year, title, venue, link]) => {
     const article = document.createElement("article");
     article.className = "stack-item";
     article.innerHTML = `
@@ -451,7 +456,7 @@ function renderPublications() {
       <a class="publication-link" href="${link}" target="_blank" rel="noreferrer">${getTranslation("publications.readMore")}</a>
     `;
     container.appendChild(article);
-  });
+    });
   document.getElementById("publication-count").textContent = content.publications.length;
 }
 
