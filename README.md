@@ -5,12 +5,12 @@ Static GitHub Pages site for `cbkalayci.github.io`.
 ## Structure
 
 - `index.html`: home page
+- `cv/index.html`: full web CV page (ported from Overleaf)
 - `research/index.html`: research and publications page
 - `teaching/index.html`: teaching and supervision page
 - `projects/index.html`: academic projects and applications page
 - `styles.css`: shared minimalist layout and typography
 - `script.js`: footer year
-- `assets/Can_B_Kalayci_CV_2025.pdf`: downloadable CV
 - `assets/can-b-kalayci-photo.png`: portrait copied from the uploaded Overleaf source
 
 ## Local preview
