@@ -19,11 +19,11 @@ const pageHeadTranslations = {
   "/cv/": {
     en: {
       title: "CV | Can B. Kalayci",
-      description: "Curriculum vitae overview of Can B. Kalayci with links to dedicated sections."
+      description: "Curriculum vitae of Can B. Kalayci."
     },
     tr: {
       title: "Özgeçmiş | Can B. Kalayci",
-      description: "Can B. Kalayci'nin ilgili bölümlere bağlantılar içeren özgeçmiş özeti."
+      description: "Can B. Kalayci'nin özgeçmişi."
     }
   },
   "/research/": {
@@ -151,27 +151,7 @@ const pageTranslations = {
   ],
   "/cv/": [
     { selector: "h1", en: "Curriculum Vitae", tr: "Özgeçmiş" },
-    { selector: ".subtitle", en: "Central profile overview with shared section pages", tr: "Paylaşımlı bölüm sayfalarıyla merkezi profil özeti" },
-    {
-      selector: "article.content p:nth-of-type(2)",
-      html: true,
-      en: `The CV content is organized as shared top-level pages to avoid repeated
-          entries. Detailed records are maintained in:
-          <a href="/research/">Research</a>,
-          <a href="/publications/">Publications</a>,
-          <a href="/projects/">Projects</a>,
-          <a href="/teaching/">Teaching</a>,
-          <a href="/experience/">Experience</a>, and
-          <a href="/service/">Service &amp; Awards</a>.`,
-      tr: `CV içeriği tekrarları önlemek için ortak üst düzey sayfalar halinde düzenlenmiştir.
-          Ayrıntılı kayıtlar şu bölümlerde tutulmaktadır:
-          <a href="/research/">Araştırma</a>,
-          <a href="/publications/">Yayınlar</a>,
-          <a href="/projects/">Projeler</a>,
-          <a href="/teaching/">Eğitim</a>,
-          <a href="/experience/">Deneyim</a> ve
-          <a href="/service/">Hizmet ve Ödüller</a>.`
-    },
+    { selector: ".subtitle", en: "Comprehensive academic profile", tr: "Kapsamlı akademik profil" },
     { selector: "article.content h2:nth-of-type(1)", en: "Research Interests", tr: "Araştırma Alanları" },
     { selector: "article.content h2:nth-of-type(2)", en: "Education", tr: "Eğitim" },
     { selector: "article.content h2:nth-of-type(3)", en: "Technical Skills", tr: "Teknik Beceriler" },
@@ -323,15 +303,7 @@ const pageTranslations = {
       tr: `<strong>Sürdürülebilirlik:</strong> döngüsel üretim sistemleri ve çevresel açıdan
             duyarlı karar modelleri.`
     },
-    { selector: "article.content h2:nth-of-type(2)", en: "Selected Journal Publications", tr: "Seçili Dergi Yayınları" },
-    {
-      selector: "article.content p:last-of-type",
-      html: true,
-      en: `For the full publication record, please see the
-          <a href="/publications/">Publications page</a>.`,
-      tr: `Tüm yayın kayıtları için
-          <a href="/publications/">Yayınlar sayfasına</a> bakabilirsiniz.`
-    }
+    { selector: "article.content h2:nth-of-type(2)", en: "Selected Journal Publications", tr: "Seçili Dergi Yayınları" }
   ],
   "/publications/": [
     { selector: "h1", en: "Publications", tr: "Yayınlar" },
@@ -547,14 +519,6 @@ const pageTranslations = {
             (Pamukkale University Internal Grant, Turkey, 2014-2015). Principal Investigator.`,
       tr: `<strong>Zaman Kısıtları Altında Eşzamanlı Toplama ve Dağıtım İçeren Araç Rotalama Problemlerinin Metasezgisel Yöntemlerle Çözümü</strong>
             (Pamukkale Üniversitesi BAP Projesi, Türkiye, 2014-2015). Yürütücü.`
-    },
-    {
-      selector: "article.content p:last-of-type",
-      html: true,
-      en: `Related outputs are listed on the
-          <a href="/publications/">Publications page</a>.`,
-      tr: `İlgili çıktılar
-          <a href="/publications/">Yayınlar sayfasında</a> listelenmektedir.`
     }
   ],
   "/experience/": [
@@ -599,14 +563,6 @@ const pageTranslations = {
       tr: `<strong>Araştırma Stajyeri</strong>, Cybernetics and AI Lab, Technical University of
             Košice, Slovakya (2003 Yaz Dönemi). Akıllı sistemler için yazılım bileşenleri
             geliştirdi.`
-    },
-    {
-      selector: "article.content p:last-of-type",
-      html: true,
-      en: `Academic service roles (TÜBİTAK panelist and Erasmus+ coordination) are listed
-          under <a href="/service/">Service &amp; Awards</a>.`,
-      tr: `Akademik hizmet rolleri (TÜBİTAK panelistliği ve Erasmus+ koordinatörlüğü)
-          <a href="/service/">Hizmet ve Ödüller</a> bölümünde listelenmektedir.`
     }
   ],
   "/service/": [
