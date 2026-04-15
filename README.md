@@ -5,7 +5,7 @@ Static GitHub Pages site for `cbkalayci.github.io`.
 ## Structure
 
 - `index.html`: home page
-- `cv/index.html`: full web CV page (ported from Overleaf)
+- `cv/index.html`: full web CV page (ported from Overleaf, tabbed by sections)
 - `research/index.html`: research and publications page
 - `teaching/index.html`: teaching and supervision page
 - `projects/index.html`: academic projects and applications page
