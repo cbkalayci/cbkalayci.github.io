@@ -1,0 +1,15 @@
+{
+  "name": "cbkalayci-github-io",
+  "private": true,
+  "scripts": {
+    "build:check": "node scripts/build-site.mjs --check",
+    "check:links": "node scripts/check-links.mjs",
+    "check:links:external": "node scripts/check-links.mjs --check-external",
+    "check:html": "find . -path \"./node_modules\" -prune -o -name \"*.html\" -print0 | xargs -0 npx --yes htmlhint",
+    "test:smoke": "playwright test",
+    "check:all": "npm run build:check && npm run check:html && npm run check:links && npm run test:smoke"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0"
+  }
+}

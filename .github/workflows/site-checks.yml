@@ -17,15 +17,22 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
 
-      - name: Install HTMLHint
-        run: npm install -g htmlhint
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
 
       - name: Verify Generated Files
         run: node scripts/build-site.mjs --check
 
       - name: Validate HTML Files
-        run: find . -name "*.html" -print0 | xargs -0 htmlhint
+        run: find . -path "./node_modules" -prune -o -name "*.html" -print0 | xargs -0 npx htmlhint
 
       - name: Check Internal Links
         run: node scripts/check-links.mjs
+
+      - name: Run Smoke Tests
+        run: npm run test:smoke

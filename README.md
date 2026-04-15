@@ -15,10 +15,11 @@ Static GitHub Pages site for `cbkalayci.github.io`.
 - `data/site-data.json`: single source for navigation and sidebar links
 - `data/papers.bib`: publication source used for generated publication blocks
 - `scripts/build-site.mjs`: syncs shared nav/sidebar and generates publications
-- `scripts/check-links.mjs`: internal link checker for CI
+- `scripts/check-links.mjs`: local link checker (`href` + `src`), with optional external URL checks
 - `.github/workflows/site-checks.yml`: automated HTML/link/build checks
 - `styles.css`: shared minimalist layout and typography
-- `script.js`: footer year, TR/EN toggle, and publication filters
+- `script.js`: footer year, key-based TR/EN toggle, and publication filters
+- `tests/smoke.spec.js`: Playwright smoke tests (language toggle, filters, shared sidebar)
 - `assets/can-b-kalayci-photo.png`: portrait copied from the uploaded Overleaf source
 
 ## Generation
@@ -33,6 +34,20 @@ To verify generated files are in sync:
 ```bash
 node scripts/build-site.mjs --check
 node scripts/check-links.mjs
+npx playwright test
+```
+
+Optional external URL health checks:
+
+```bash
+node scripts/check-links.mjs --check-external
+```
+
+Run the complete local check suite:
+
+```bash
+npm install
+npm run check:all
 ```
 
 ## Local preview

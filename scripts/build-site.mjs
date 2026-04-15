@@ -53,7 +53,7 @@ for (const page of pages) {
 
   updated = replaceOrThrow(
     updated,
-    /<nav class="top-nav" aria-label="Main navigation">[\s\S]*?<\/nav>/,
+    /<nav class="top-nav"[^>]*>[\s\S]*?<\/nav>/,
     renderNav(page.activeNav),
     page.file,
     "top navigation"
@@ -80,8 +80,8 @@ for (const page of pages) {
   if (page.file === "research/index.html") {
     updated = replaceOrThrow(
       updated,
-      /<h2>Selected Journal Publications<\/h2>[\s\S]*?<p>/,
-      `<h2>Selected Journal Publications</h2>\n${researchSelectedHtml}\n\n        <p>`,
+      /<h2[^>]*>Selected Journal Publications<\/h2>\s*<ol class="pub-list">[\s\S]*?<\/ol>/,
+      `<h2 data-i18n-key="research.selectedHeading">Selected Journal Publications</h2>\n${researchSelectedHtml}`,
       page.file,
       "selected publications block"
     );
@@ -122,7 +122,7 @@ function renderNav(activeNavKey) {
     })
     .join("\n");
 
-  return `<nav class="top-nav" aria-label="Main navigation">\n${links}\n        </nav>`;
+  return `<nav class="top-nav" aria-label="Main navigation" data-i18n-key="shared.topNavAria" data-i18n-attr="aria-label">\n${links}\n        </nav>`;
 }
 
 function renderSidebar() {
@@ -189,28 +189,16 @@ function renderResearchSelected(entries) {
 
 function parseBibTex(rawText) {
   const entries = [];
-  const entryRegex = /@(\w+)\s*\{\s*([^,]+),([\s\S]*?)\n\}/g;
-  let match;
+  const rawEntries = splitBibEntries(rawText);
 
-  while ((match = entryRegex.exec(rawText)) !== null) {
-    const body = match[3];
-    const fields = {};
-    body.split("\n").forEach((rawLine) => {
-      const line = rawLine.trim();
-      if (!line || line.startsWith("%")) {
-        return;
-      }
-      const fieldMatch = line.match(/^([A-Za-z][A-Za-z0-9_-]*)\s*=\s*(.+?)(,)?$/);
-      if (!fieldMatch) {
-        return;
-      }
-      const key = fieldMatch[1].toLowerCase();
-      let value = fieldMatch[2].trim();
-      if (value.endsWith(",")) {
-        value = value.slice(0, -1).trim();
-      }
-      fields[key] = cleanLatex(stripWrappers(value));
-    });
+  rawEntries.forEach((rawEntry) => {
+    const headerMatch = rawEntry.match(/^@(\w+)\s*\{\s*([^,]+),/i);
+    if (!headerMatch) {
+      return;
+    }
+    const bodyStart = headerMatch[0].length;
+    const body = rawEntry.slice(bodyStart, -1);
+    const fields = parseBibFields(body);
 
     const year = extractYear(fields.year || fields.date || "");
     const title = fields.title || "";
@@ -224,7 +212,7 @@ function parseBibTex(rawText) {
     const authorsText = formatAuthors(fields.author || "");
 
     if (!title) {
-      continue;
+      return;
     }
 
     entries.push({
@@ -234,17 +222,201 @@ function parseBibTex(rawText) {
       doi,
       authorsText
     });
-  }
+  });
 
   return entries;
 }
 
 function formatAuthors(authorField) {
-  return authorField
-    .split(/\s+and\s+/i)
+  return splitTopLevelAuthors(authorField)
     .map((name) => cleanLatex(name))
     .filter(Boolean)
     .join(", ");
+}
+
+function splitBibEntries(rawText) {
+  const entries = [];
+  let cursor = 0;
+
+  while (cursor < rawText.length) {
+    const atIndex = rawText.indexOf("@", cursor);
+    if (atIndex === -1) {
+      break;
+    }
+
+    const braceStart = rawText.indexOf("{", atIndex);
+    if (braceStart === -1) {
+      break;
+    }
+
+    let depth = 0;
+    let endIndex = -1;
+    for (let i = braceStart; i < rawText.length; i += 1) {
+      const char = rawText[i];
+      if (char === "{") {
+        depth += 1;
+      } else if (char === "}") {
+        depth -= 1;
+        if (depth === 0) {
+          endIndex = i;
+          break;
+        }
+      }
+    }
+
+    if (endIndex === -1) {
+      break;
+    }
+
+    entries.push(rawText.slice(atIndex, endIndex + 1));
+    cursor = endIndex + 1;
+  }
+
+  return entries;
+}
+
+function parseBibFields(body) {
+  const fields = {};
+  let cursor = 0;
+
+  while (cursor < body.length) {
+    while (cursor < body.length && /[\s,]/.test(body[cursor])) {
+      cursor += 1;
+    }
+
+    const keyStart = cursor;
+    while (cursor < body.length && /[A-Za-z0-9_-]/.test(body[cursor])) {
+      cursor += 1;
+    }
+    const rawKey = body.slice(keyStart, cursor).trim().toLowerCase();
+    if (!rawKey) {
+      break;
+    }
+
+    while (cursor < body.length && /\s/.test(body[cursor])) {
+      cursor += 1;
+    }
+    if (body[cursor] !== "=") {
+      while (cursor < body.length && body[cursor] !== ",") {
+        cursor += 1;
+      }
+      continue;
+    }
+    cursor += 1;
+
+    while (cursor < body.length && /\s/.test(body[cursor])) {
+      cursor += 1;
+    }
+
+    const { value, nextCursor } = readBibValue(body, cursor);
+    cursor = nextCursor;
+    fields[rawKey] = cleanLatex(stripWrappers(value));
+  }
+
+  return fields;
+}
+
+function readBibValue(text, start) {
+  const char = text[start];
+
+  if (char === "{") {
+    return readBalancedValue(text, start, "{", "}");
+  }
+  if (char === '"') {
+    return readBalancedValue(text, start, '"', '"');
+  }
+
+  let cursor = start;
+  while (cursor < text.length && text[cursor] !== ",") {
+    cursor += 1;
+  }
+  const value = text.slice(start, cursor).trim();
+  if (text[cursor] === ",") {
+    cursor += 1;
+  }
+  return { value, nextCursor: cursor };
+}
+
+function readBalancedValue(text, start, openChar, closeChar) {
+  let cursor = start;
+  let depth = 0;
+  let escaped = false;
+
+  while (cursor < text.length) {
+    const char = text[cursor];
+    if (openChar === '"' && closeChar === '"') {
+      if (!escaped && char === '"') {
+        depth = depth === 0 ? 1 : depth - 1;
+        if (depth === 0) {
+          cursor += 1;
+          break;
+        }
+      }
+      escaped = char === "\\" && !escaped;
+      cursor += 1;
+      continue;
+    }
+
+    if (char === openChar) {
+      depth += 1;
+    } else if (char === closeChar) {
+      depth -= 1;
+      if (depth === 0) {
+        cursor += 1;
+        break;
+      }
+    }
+    cursor += 1;
+  }
+
+  const value = text.slice(start, cursor).trim();
+  while (cursor < text.length && /\s/.test(text[cursor])) {
+    cursor += 1;
+  }
+  if (text[cursor] === ",") {
+    cursor += 1;
+  }
+  return { value, nextCursor: cursor };
+}
+
+function splitTopLevelAuthors(authorField) {
+  const authors = [];
+  let current = "";
+  let depth = 0;
+  let inQuote = false;
+
+  for (let i = 0; i < authorField.length; i += 1) {
+    const char = authorField[i];
+    const nextFive = authorField.slice(i, i + 5).toLowerCase();
+
+    if (char === '"' && authorField[i - 1] !== "\\") {
+      inQuote = !inQuote;
+    }
+    if (!inQuote) {
+      if (char === "{") {
+        depth += 1;
+      } else if (char === "}" && depth > 0) {
+        depth -= 1;
+      }
+    }
+
+    if (depth === 0 && !inQuote && nextFive === " and ") {
+      if (current.trim()) {
+        authors.push(current.trim());
+      }
+      current = "";
+      i += 4;
+      continue;
+    }
+
+    current += char;
+  }
+
+  if (current.trim()) {
+    authors.push(current.trim());
+  }
+
+  return authors;
 }
 
 function extractYear(raw) {
@@ -286,27 +458,56 @@ function stripWrappers(value) {
 
 function cleanLatex(text) {
   let output = text;
+
+  const unwrapCommand = /\\[A-Za-z]+\*?\s*\{([^{}]*)\}/g;
+  let previous = "";
+  while (previous !== output) {
+    previous = output;
+    output = output.replace(unwrapCommand, "$1");
+  }
+
   const replacements = [
     [/\\&/g, "&"],
     [/\\%/g, "%"],
     [/\\_/g, "_"],
+    [/\\~/g, " "],
     [/\\i/g, "i"],
+    [/\\'{?c}?/g, "c"],
+    [/\\'{?C}?/g, "C"],
+    [/\\'{?o}?/g, "o"],
+    [/\\'{?O}?/g, "O"],
+    [/\\'{?u}?/g, "u"],
+    [/\\'{?U}?/g, "U"],
+    [/\\'{?s}?/g, "s"],
+    [/\\'{?S}?/g, "S"],
+    [/\\'{?g}?/g, "g"],
+    [/\\'{?G}?/g, "G"],
     [/\\\"{?o}?/g, "ö"],
     [/\\\"{?u}?/g, "ü"],
     [/\\\"{?a}?/g, "ä"],
     [/\\\"{?O}?/g, "Ö"],
     [/\\\"{?U}?/g, "Ü"],
+    [/\\c\{?c\}?/g, "ç"],
+    [/\\c\{?C\}?/g, "Ç"],
+    [/\\u\{?g\}?/g, "ğ"],
+    [/\\u\{?G\}?/g, "Ğ"],
+    [/\\s\{?s\}?/g, "ş"],
+    [/\\S\{?S\}?/g, "Ş"],
     [/\\'{?i}?/g, "i"],
     [/\\'{?a}?/g, "a"],
     [/\\'{?e}?/g, "e"],
     [/\\`{?a}?/g, "a"],
-    [/\\`{?e}?/g, "e"]
+    [/\\`{?e}?/g, "e"],
+    [/\{\{+/g, "{"],
+    [/\}\}+/g, "}"]
   ];
   replacements.forEach(([pattern, value]) => {
     output = output.replace(pattern, value);
   });
+
   output = output.replace(/[{}]/g, "");
   output = output.replace(/\\[A-Za-z]+/g, "");
+  output = output.replace(/\\./g, "");
   output = output.replace(/\s+/g, " ").trim();
   return output;
 }

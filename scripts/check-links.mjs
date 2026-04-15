@@ -4,9 +4,12 @@ import fs from "node:fs";
 import path from "node:path";
 
 const rootDir = process.cwd();
+const checkExternal = process.argv.includes("--check-external");
+const externalTimeoutMs = readExternalTimeoutMs(process.argv, 8000);
 const htmlFiles = collectHtmlFiles(rootDir);
 const idMap = new Map();
 const errors = [];
+const externalRefs = new Set();
 
 for (const file of htmlFiles) {
   const content = fs.readFileSync(file, "utf8");
@@ -19,35 +22,52 @@ for (const file of htmlFiles) {
 
 for (const file of htmlFiles) {
   const content = fs.readFileSync(file, "utf8");
-  for (const match of content.matchAll(/href="([^"]+)"/g)) {
-    const href = match[1].trim();
-    if (shouldSkip(href)) {
+  for (const match of content.matchAll(/\b(href|src)="([^"]+)"/g)) {
+    const attr = match[1];
+    const ref = match[2].trim();
+    const refType = classifyRef(ref);
+    if (refType === "ignore") {
+      continue;
+    }
+    if (refType === "external") {
+      externalRefs.add(normalizeExternalRef(ref));
       continue;
     }
 
-    const [rawPath, fragment] = href.split("#");
-    const resolvedTarget = resolveTarget(file, rawPath || "");
+    const { rawPath, fragment } = splitRef(ref);
+    const resolvedTarget = resolveTarget(file, rawPath);
     if (!resolvedTarget || !fs.existsSync(resolvedTarget)) {
-      errors.push(`${toRel(file)} -> ${href} (target not found)`);
+      errors.push(`${toRel(file)} -> ${attr}="${ref}" (target not found)`);
       continue;
     }
 
-    if (fragment) {
+    if (attr === "href" && fragment && resolvedTarget.endsWith(".html")) {
       const targetIds = idMap.get(resolvedTarget);
       if (!targetIds || !targetIds.has(fragment)) {
-        errors.push(`${toRel(file)} -> ${href} (missing #${fragment})`);
+        errors.push(`${toRel(file)} -> ${attr}="${ref}" (missing #${fragment})`);
       }
     }
   }
 }
 
+if (checkExternal && externalRefs.size > 0) {
+  const externalErrors = await checkExternalReferences(
+    Array.from(externalRefs.values()),
+    externalTimeoutMs
+  );
+  errors.push(...externalErrors);
+}
+
 if (errors.length) {
-  console.error("Internal link check failed:");
+  console.error("Link check failed:");
   errors.forEach((err) => console.error(`- ${err}`));
   process.exit(1);
 }
 
-console.log(`Internal link check passed (${htmlFiles.length} HTML files).`);
+const externalSummary = checkExternal
+  ? `, external checked: ${externalRefs.size}`
+  : "";
+console.log(`Link check passed (${htmlFiles.length} HTML files${externalSummary}).`);
 
 function collectHtmlFiles(dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -66,25 +86,44 @@ function collectHtmlFiles(dir) {
   return files;
 }
 
-function shouldSkip(href) {
-  return (
-    href.startsWith("http://") ||
-    href.startsWith("https://") ||
-    href.startsWith("mailto:") ||
-    href.startsWith("tel:")
-  );
+function classifyRef(ref) {
+  if (
+    !ref ||
+    ref.startsWith("mailto:") ||
+    ref.startsWith("tel:") ||
+    ref.startsWith("javascript:") ||
+    ref.startsWith("data:") ||
+    ref.startsWith("blob:")
+  ) {
+    return "ignore";
+  }
+  if (ref.startsWith("http://") || ref.startsWith("https://") || ref.startsWith("//")) {
+    return "external";
+  }
+  return "local";
 }
 
-function resolveTarget(fromFile, hrefPath) {
-  if (!hrefPath || hrefPath === "") {
+function splitRef(ref) {
+  const hashIndex = ref.indexOf("#");
+  const rawPathWithQuery = hashIndex === -1 ? ref : ref.slice(0, hashIndex);
+  const fragment = hashIndex === -1 ? "" : ref.slice(hashIndex + 1);
+  const queryIndex = rawPathWithQuery.indexOf("?");
+  const rawPath =
+    queryIndex === -1 ? rawPathWithQuery : rawPathWithQuery.slice(0, queryIndex);
+
+  return { rawPath, fragment };
+}
+
+function resolveTarget(fromFile, rawPath) {
+  if (!rawPath) {
     return fromFile;
   }
 
   let absolute;
-  if (hrefPath.startsWith("/")) {
-    absolute = path.join(rootDir, hrefPath);
+  if (rawPath.startsWith("/")) {
+    absolute = path.join(rootDir, rawPath);
   } else {
-    absolute = path.resolve(path.dirname(fromFile), hrefPath);
+    absolute = path.resolve(path.dirname(fromFile), rawPath);
   }
 
   if (fs.existsSync(absolute) && fs.statSync(absolute).isDirectory()) {
@@ -108,6 +147,91 @@ function resolveTarget(fromFile, hrefPath) {
   }
 
   return null;
+}
+
+async function checkExternalReferences(refs, timeoutMs) {
+  const failures = [];
+
+  for (const ref of refs) {
+    const result = await probeExternalRef(ref, timeoutMs);
+    if (!result.ok) {
+      failures.push(`external ${ref} (${result.reason})`);
+    }
+  }
+
+  return failures;
+}
+
+async function probeExternalRef(ref, timeoutMs) {
+  const headResponse = await fetchWithTimeout(ref, "HEAD", timeoutMs);
+  if (isReachableStatus(headResponse.status)) {
+    return { ok: true };
+  }
+
+  if (
+    headResponse.status === 405 ||
+    headResponse.status === 501 ||
+    headResponse.status === 0
+  ) {
+    const getResponse = await fetchWithTimeout(ref, "GET", timeoutMs);
+    if (isReachableStatus(getResponse.status)) {
+      return { ok: true };
+    }
+    return {
+      ok: false,
+      reason: getResponse.error || `HTTP ${getResponse.status}`
+    };
+  }
+
+  return {
+    ok: false,
+    reason: headResponse.error || `HTTP ${headResponse.status}`
+  };
+}
+
+function isReachableStatus(status) {
+  return (
+    (status > 0 && status < 500) ||
+    status === 999
+  );
+}
+
+async function fetchWithTimeout(url, method, timeoutMs) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(url, {
+      method,
+      redirect: "follow",
+      signal: controller.signal
+    });
+    return { status: response.status };
+  } catch (error) {
+    const message =
+      error?.name === "AbortError" ? `timeout after ${timeoutMs}ms` : String(error);
+    return { status: 0, error: message };
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+function normalizeExternalRef(ref) {
+  if (ref.startsWith("//")) {
+    return `https:${ref}`;
+  }
+  return ref;
+}
+
+function readExternalTimeoutMs(argv, defaultValue) {
+  const arg = argv.find((item) => item.startsWith("--external-timeout="));
+  if (!arg) {
+    return defaultValue;
+  }
+  const value = Number(arg.split("=")[1]);
+  if (!Number.isFinite(value) || value <= 0) {
+    return defaultValue;
+  }
+  return value;
 }
 
 function toRel(file) {

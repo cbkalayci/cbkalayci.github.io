@@ -1,2 +1,5 @@
 .DS_Store
 my_CV_Resume_Project_Latex_Overleaf__v9.zip
+node_modules
+test-results
+playwright-report
