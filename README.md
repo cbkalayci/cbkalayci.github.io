@@ -1,22 +1,36 @@
 # cbkalayci.github.io
 
-Bilingual, minimalist academic website for Can B. Kalayci.
+Static GitHub Pages site for `cbkalayci.github.io`.
 
-## Repository Layout
+## Structure
 
-- `index.html`: main tab-based interface
-- `styles.css`: responsive minimalist styling
-- `script.js`: bilingual content and tab behavior
-- `assets/`: portrait and static assets
-- `.nojekyll`: ensures GitHub Pages serves the site as plain static files
+- `index.html`: minimalist academic homepage
+- `styles.css`: layout and typography
+- `script.js`: footer year
+- `assets/Can_B_Kalayci_CV_2025.pdf`: downloadable CV
+- `assets/can-b-kalayci-photo.png`: portrait copied from the uploaded Overleaf source
 
-## Publish on GitHub Pages
+## Local preview
 
-1. Create a public repository named `cbkalayci.github.io`.
-2. Upload the contents of this folder to the repository root.
-3. GitHub Pages will serve the site automatically from the repository root.
+```bash
+cd /Users/cbkalayci/Documents/Playground/cbkalayci.github.io
+python3 -m http.server 4173
+```
 
-## Notes
+Then open `http://localhost:4173`.
 
-- No build step is required.
-- The site is fully static and suitable for direct GitHub Pages hosting.
+## Publishing to GitHub Pages
+
+For a user site, the repository name must be exactly `cbkalayci.github.io`.
+
+```bash
+cd /Users/cbkalayci/Documents/Playground/cbkalayci.github.io
+git init
+git add .
+git commit -m "Build academic homepage"
+git branch -M main
+git remote add origin https://github.com/cbkalayci/cbkalayci.github.io.git
+git push -u origin main
+```
+
+Once pushed, GitHub Pages serves the site from the repository root automatically for a user site.
