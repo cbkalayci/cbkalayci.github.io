@@ -7,6 +7,7 @@ Static GitHub Pages site for `cbkalayci.github.io`.
 - `index.html`: home page
 - `research/index.html`: research and publications page
 - `teaching/index.html`: teaching and supervision page
+- `projects/index.html`: academic projects and applications page
 - `styles.css`: shared minimalist layout and typography
 - `script.js`: footer year
 - `assets/Can_B_Kalayci_CV_2025.pdf`: downloadable CV
