@@ -1,3 +1,3 @@
-document.querySelectorAll("[data-current-year]").forEach((node) => {
+document.querySelectorAll("[data-year]").forEach((node) => {
   node.textContent = new Date().getFullYear();
 });
