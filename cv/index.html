@@ -6,7 +6,7 @@
     <title>CV | Can B. Kalayci</title>
     <meta
       name="description"
-      content="Complete curriculum vitae of Can B. Kalayci organized with tabbed sections."
+      content="Curriculum vitae overview of Can B. Kalayci with links to dedicated sections."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,8 +24,11 @@
           <a href="/">Home</a>
           <a class="is-active" href="/cv/">CV</a>
           <a href="/research/">Research</a>
+          <a href="/publications/">Publications</a>
           <a href="/teaching/">Teaching</a>
           <a href="/projects/">Projects</a>
+          <a href="/experience/">Experience</a>
+          <a href="/service/">Service &amp; Awards</a>
         </nav>
       </div>
     </header>
@@ -65,565 +68,81 @@
 
       <article class="content">
         <h1>Curriculum Vitae</h1>
-        <p class="subtitle">All CV sections are organized in tabs for quick browsing.</p>
+        <p class="subtitle">Central profile overview with shared section pages</p>
 
-        <div class="cv-tabs-wrap" data-tabs>
-          <nav class="cv-tabs" role="tablist" aria-label="CV sections">
-            <button
-              type="button"
-              id="tab-button-overview"
-              class="cv-tab-btn is-active"
-              role="tab"
-              aria-selected="true"
-              aria-controls="tab-panel-overview"
-              data-tab-target="tab-panel-overview"
+        <p>
+          The CV content is organized as shared top-level pages to avoid repeated
+          entries. Detailed records are maintained in:
+          <a href="/research/">Research</a>,
+          <a href="/publications/">Publications</a>,
+          <a href="/projects/">Projects</a>,
+          <a href="/teaching/">Teaching</a>,
+          <a href="/experience/">Experience</a>, and
+          <a href="/service/">Service &amp; Awards</a>.
+        </p>
+
+        <h2>Research Interests</h2>
+        <ul>
+          <li>
+            <strong>Design and Analysis of Optimization and AI Algorithms:</strong>
+            metaheuristics, machine-learning-assisted optimization, and hybrid methods.
+          </li>
+          <li>
+            <strong>Application Domains:</strong> vehicle routing, scheduling, disassembly line
+            balancing, and portfolio optimization.
+          </li>
+          <li>
+            <strong>Sustainability:</strong> environmentally conscious modeling and circular
+            manufacturing systems.
+          </li>
+        </ul>
+
+        <h2>Education</h2>
+        <ul>
+          <li>
+            <strong>Northeastern University</strong>, Boston, MA, USA (2008-2012)<br />
+            Ph.D. in Industrial Engineering<br />
+            Dissertation:
+            <em>Algorithms for Solving Sequence-Dependent Disassembly Line Balancing Problems</em><br />
+            Supervisor: Prof. Surendra M. Gupta<br />
+            Repository:
+            <a
+              href="https://repository.library.northeastern.edu/files/neu:1605"
+              target="_blank"
+              rel="noreferrer"
             >
-              Overview
-            </button>
-            <button
-              type="button"
-              id="tab-button-publications"
-              class="cv-tab-btn"
-              role="tab"
-              aria-selected="false"
-              aria-controls="tab-panel-publications"
-              data-tab-target="tab-panel-publications"
-            >
-              Publications
-            </button>
-            <button
-              type="button"
-              id="tab-button-projects"
-              class="cv-tab-btn"
-              role="tab"
-              aria-selected="false"
-              aria-controls="tab-panel-projects"
-              data-tab-target="tab-panel-projects"
-            >
-              Projects
-            </button>
-            <button
-              type="button"
-              id="tab-button-experience"
-              class="cv-tab-btn"
-              role="tab"
-              aria-selected="false"
-              aria-controls="tab-panel-experience"
-              data-tab-target="tab-panel-experience"
-            >
-              Experience
-            </button>
-            <button
-              type="button"
-              id="tab-button-teaching"
-              class="cv-tab-btn"
-              role="tab"
-              aria-selected="false"
-              aria-controls="tab-panel-teaching"
-              data-tab-target="tab-panel-teaching"
-            >
-              Teaching
-            </button>
-            <button
-              type="button"
-              id="tab-button-service"
-              class="cv-tab-btn"
-              role="tab"
-              aria-selected="false"
-              aria-controls="tab-panel-service"
-              data-tab-target="tab-panel-service"
-            >
-              Service & Awards
-            </button>
-          </nav>
+              Northeastern University Repository
+            </a>
+          </li>
+          <li>
+            <strong>Pamukkale University</strong>, Denizli, Turkey (2005-2008)<br />
+            M.Sc. in Industrial Engineering<br />
+            Thesis:
+            <em>
+              A Student Success-Oriented Examination Timetabling Model and Its Software
+              Implementation
+            </em><br />
+            Supervisor: Prof. Askiner Gungor
+          </li>
+          <li>
+            <strong>Sakarya University</strong>, Sakarya, Turkey (2001-2005)<br />
+            B.Sc. in Computer Engineering, Graduated with High Honors
+          </li>
+        </ul>
 
-          <section
-            id="tab-panel-overview"
-            class="cv-tab-panel is-active"
-            role="tabpanel"
-            aria-labelledby="tab-button-overview"
-          >
-            <h2>Research Interests</h2>
-            <ul>
-              <li>
-                <strong>Design and Analysis of Optimization and AI Algorithms:</strong>
-                development, hybridization, and performance evaluation of metaheuristics and
-                machine-learning techniques for complex decision-making problems.
-              </li>
-              <li>
-                <strong>Application Domains:</strong> production and disassembly line balancing,
-                scheduling, electric vehicle routing, and portfolio optimization.
-              </li>
-              <li>
-                <strong>Methodological Focus:</strong> combinatorial optimization, data-driven
-                forecasting, environmentally conscious modeling, and sustainability-driven
-                systems design.
-              </li>
-            </ul>
+        <h2>Technical Skills</h2>
+        <ul>
+          <li><strong>Programming:</strong> Python, MATLAB, C/C++, Julia</li>
+          <li><strong>Optimization:</strong> Gurobi, IBM CPLEX</li>
+          <li><strong>Data Analysis and ML:</strong> pandas, NumPy, Scikit-learn</li>
+          <li><strong>Scientific Writing:</strong> LaTeX, Overleaf</li>
+        </ul>
 
-            <h2>Education</h2>
-            <ul>
-              <li>
-                <strong>Northeastern University</strong>, Boston, MA, USA (2008-2012)<br />
-                Ph.D. in Industrial Engineering<br />
-                Dissertation:
-                <em>Algorithms for Solving Sequence-Dependent Disassembly Line Balancing Problems</em><br />
-                Supervisor: Prof. Surendra M. Gupta<br />
-                Repository:
-                <a
-                  href="https://repository.library.northeastern.edu/files/neu:1605"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Northeastern University Repository
-                </a>
-              </li>
-              <li>
-                <strong>Pamukkale University</strong>, Denizli, Turkey (2005-2008)<br />
-                M.Sc. in Industrial Engineering<br />
-                Thesis:
-                <em>
-                  A Student Success-Oriented Examination Timetabling Model and Its Software
-                  Implementation
-                </em><br />
-                Supervisor: Prof. Askiner Gungor
-              </li>
-              <li>
-                <strong>Sakarya University</strong>, Sakarya, Turkey (2001-2005)<br />
-                B.Sc. in Computer Engineering, Graduated with High Honors
-              </li>
-            </ul>
-
-            <h2>Technical Skills</h2>
-            <ul>
-              <li><strong>Programming:</strong> Python, MATLAB, C/C++, Julia</li>
-              <li><strong>Optimization:</strong> Gurobi, IBM CPLEX</li>
-              <li><strong>Data Analysis and ML:</strong> pandas, NumPy, Scikit-learn</li>
-              <li><strong>Scientific Writing:</strong> LaTeX, Overleaf</li>
-            </ul>
-
-            <h2>Languages</h2>
-            <ul>
-              <li><strong>English:</strong> C1-C2 (Proficient)</li>
-              <li><strong>Turkish:</strong> Native speaker (C2)</li>
-            </ul>
-          </section>
-
-          <section
-            id="tab-panel-publications"
-            class="cv-tab-panel"
-            role="tabpanel"
-            aria-labelledby="tab-button-publications"
-            hidden
-          >
-            <h2>Complete Publications</h2>
-            <p>31 publication records are listed below.</p>
-            <ol class="pub-list">
-              <li>
-                <strong>An enhanced variable neighborhood search algorithm for rich multi-compartment vehicle routing problems.</strong>
-                Polat, O., Kalayci, C. B., and Topaloğlu, D.
-                <em>Soft Computing</em>, 2026.
-                <a href="https://doi.org/10.1007/s00500-025-10955-8" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>CMSA based on set covering models for packing and routing problems.</strong>
-                Akbay, Mehmet Anil, Blum, Christian, Kalayci, Can Berk.
-                <em>Annals of Operations Research</em>, 2024.
-              </li>
-              <li>
-                <strong>A Parallel Variable Neighborhood Search Algorithm with Quadratic Programming for Cardinality Constrained Portfolio Optimization.</strong>
-                Akbay, M.A., Kalayci, C.B., Polat, O.
-                <em>Knowledge-Based Systems</em>, 2020.
-                <a href="https://doi.org/10.1016/j.knosys.2020.105944" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>A Variable Neighborhood Search Algorithm for Cost-Balanced Travelling Salesman Problem.</strong>
-                Akbay, M.A., Kalayci, C.B.
-                <em>Advances in Intelligent Systems and Computing</em>, 2021.
-                <a href="https://doi.org/10.1007/978-3-030-68520-1_3" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>Variable Neighborhood Search for the Two-Echelon Electric Vehicle Routing Problem with Time Windows.</strong>
-                Akbay, M.A., Kalayci, C.B., Blum, C., Polat, O.
-                <em>Applied Sciences (Switzerland)</em>, 2022.
-                <a href="https://doi.org/10.3390/app12031014" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>Enhancing Combinatorial Optimization with Classical and Quantum Generative Models.</strong>
-                Alcazar, J., Ghazi Vakili, M., Kalayci, C.B., Perdomo-Ortiz, A.
-                <em>Nature Communications</em>, 2024.
-                <a href="https://doi.org/10.1038/s41467-024-46959-5" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>A Survey of Swarm Intelligence for Portfolio Optimization: Algorithms and Applications.</strong>
-                Ertenlice, O., Kalayci, C.B.
-                <em>Swarm and Evolutionary Computation</em>, 2018.
-                <a href="https://doi.org/10.1016/j.swevo.2018.01.009" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>Advances in Partial Disassembly Line Balancing: A State-of-the-Art Review.</strong>
-                Güler, E., Kalayci, C.B., Ali Ilgin, M., Özceylan, E., Güngör, A.
-                <em>Computers and Industrial Engineering</em>, 2024.
-                <a href="https://doi.org/10.1016/j.cie.2024.109898" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>Responsible &amp; Sustainable Manufacturing.</strong>
-                Gupta, S.M., Güngör, A., Govindan, K., Özceylan, E., Kalaycı, C.B., Piplani, R.
-                <em>International Journal of Production Research</em>, 2020.
-                <a href="https://doi.org/10.1080/00207543.2020.1841968" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>Ant Colony Optimization for Sequence-Dependent Disassembly Line Balancing Problem.</strong>
-                Kalayci, C.B., Gupta, S.M.
-                <em>Journal of Manufacturing Technology Management</em>, 2013.
-                <a href="https://doi.org/10.1108/17410381311318909" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>An Ant Colony System Empowered Variable Neighborhood Search Algorithm for the Vehicle Routing Problem with Simultaneous Pickup and Delivery.</strong>
-                Kalayci, C.B., Kaya, C.
-                <em>Expert Systems with Applications</em>, 2016.
-                <a href="https://doi.org/10.1016/j.eswa.2016.09.017" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>Artificial Bee Colony Algorithm for Solving Sequence-Dependent Disassembly Line Balancing Problem.</strong>
-                Kalayci, C.B., Gupta, S.M.
-                <em>Expert Systems with Applications</em>, 2013.
-                <a href="https://doi.org/10.1016/j.eswa.2013.06.067" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>An Artificial Bee Colony Algorithm with Feasibility Enforcement and Infeasibility Toleration Procedures for Cardinality Constrained Portfolio Optimization.</strong>
-                Kalayci, C.B., Ertenlice, O., Akyer, H., Aygoren, H.
-                <em>Expert Systems with Applications</em>, 2017.
-                <a href="https://doi.org/10.1016/j.eswa.2017.05.018" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>Balancing a Sequencedependent Disassembly Line Using Simulated Annealing Algorithm.</strong>
-                Kalayci, C.B., Gupta, S.M.
-                <em>Applications of Management Science</em>, 2013.
-                <a href="https://doi.org/10.1108/S0276-8976(2013)0000016008" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>Bee Colony Intelligence in Fatigue Life Estimation of Simulated Magnesium Alloy Welds.</strong>
-                Kalayci, C.B., Karagöz, S., Karakaş, Ö.
-                <em>International Journal of Fatigue</em>, 2019.
-                <a href="https://doi.org/10.1016/j.ijfatigue.2019.05.032" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>A Comprehensive Review of Deterministic Models and Applications for Mean-Variance Portfolio Optimization.</strong>
-                Kalayci, C.B., Ertenlice, O., Akbay, M.A.
-                <em>Expert Systems with Applications</em>, 2019.
-                <a href="https://doi.org/10.1016/j.eswa.2019.02.011" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>An Efficient Hybrid Metaheuristic Algorithm for Cardinality Constrained Portfolio Optimization.</strong>
-                Kalayci, C.B., Polat, O., Akbay, M.A.
-                <em>Swarm and Evolutionary Computation</em>, 2020.
-                <a href="https://doi.org/10.1016/j.swevo.2020.100662" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>A Genetic Algorithm Based Examination Timetabling Model Focusing on Student Success for the Case of the College of Engineering at Pamukkale University, Turkey.</strong>
-                Kalayci, C.B., Güngör, A.
-                <em>Gazi University Journal of Science</em>, 2012.
-              </li>
-              <li>
-                <strong>A Hybrid Genetic Algorithm for Sequence-Dependent Disassembly Line Balancing Problem.</strong>
-                Kalayci, C.B., Polat, O., Gupta, S.M.
-                <em>Annals of Operations Research</em>, 2016.
-                <a href="https://doi.org/10.1007/s10479-014-1641-3" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>Multi-Objective Fuzzy Disassembly Line Balancing Using a Hybrid Discrete Artificial Bee Colony Algorithm.</strong>
-                Kalayci, C.B., Hancilar, A., Gungor, A., Gupta, S.M.
-                <em>Journal of Manufacturing Systems</em>, 2015.
-                <a href="https://doi.org/10.1016/j.jmsy.2014.11.015" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>A Particle Swarm Optimization Algorithm with Neighborhood-Based Mutation for Sequence-Dependent Disassembly Line Balancing Problem.</strong>
-                Kalayci, C.B., Gupta, S.M.
-                <em>International Journal of Advanced Manufacturing Technology</em>, 2013.
-                <a href="https://doi.org/10.1007/s00170-013-4990-1" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>Soft Computing Methods for Fatigue Life Estimation: A Review of the Current State and Future Trends.</strong>
-                Kalayci, C.B., Karagoz, S., Karakas, Ö.
-                <em>Fatigue and Fracture of Engineering Materials and Structures</em>, 2020.
-                <a href="https://doi.org/10.1111/ffe.13343" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>A Tabu Search Algorithm for Balancing a Sequence-Dependent Disassembly Line.</strong>
-                Kalayci, C.B., Gupta, S.M.
-                <em>Production Planning and Control</em>, 2014.
-                <a href="https://doi.org/10.1080/09537287.2013.782949" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>A Variable Neighbourhood Search Algorithm for Disassembly Lines.</strong>
-                Kalayci, C.B., Polat, O., Gupta, S.M.
-                <em>Journal of Manufacturing Technology Management</em>, 2015.
-                <a href="https://doi.org/10.1108/JMTM-11-2013-0168" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>Disassembly Line Balancing Problem: A Review of the State of the Art and Future Directions.</strong>
-                Özceylan, E., Kalayci, C.B., Güngör, A., Gupta, S.M.
-                <em>International Journal of Production Research</em>, 2019.
-                <a href="https://doi.org/10.1080/00207543.2018.1428775" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>Classification of Raw Cow Milk Using Information Fusion Framework.</strong>
-                Polat, O., Akçok, S.G., Akbay, M.A., Topaloğlu, D., Arslan, S., Kalayci, C.B.
-                <em>Journal of Food Measurement and Characterization</em>, 2021.
-                <a href="https://doi.org/10.1007/s11694-021-01076-5" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>Modelling and Solving the Milk Collection Problem with Realistic Constraints.</strong>
-                Polat, O., Berk Kalayci, C., Topaloğlu, D.
-                <em>Computers and Operations Research</em>, 2022.
-                <a href="https://doi.org/10.1016/j.cor.2022.105759" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>A Perturbation Based Variable Neighborhood Search Heuristic for Solving the Vehicle Routing Problem with Simultaneous Pickup and Delivery with Time Limit.</strong>
-                Polat, O., Kalayci, C.B., Kulak, O., Günther, H.-O.
-                <em>European Journal of Operational Research</em>, 2015.
-                <a href="https://doi.org/10.1016/j.ejor.2014.10.010" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>A Two-Phase Variable Neighbourhood Search Algorithm for Assembly Line Worker Assignment and Balancing Problem Type-II: An Industrial Case Study.</strong>
-                Polat, O., Kalayci, C.B., Mutlu, O., Gupta, S.M.
-                <em>International Journal of Production Research</em>, 2016.
-                <a href="https://doi.org/10.1080/00207543.2015.1055344" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>Low-Cycle Fatigue Parameters and Fatigue Life Estimation of High-Strength Steels with Artificial Neural Networks.</strong>
-                Soyer, M.A., Kalaycı, C.B., Karakaş, Ö.
-                <em>Fatigue and Fracture of Engineering Materials and Structures</em>, 2022.
-                <a href="https://doi.org/10.1111/ffe.13847" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-              <li>
-                <strong>Variable Neighborhood Search Algorithms to Solve the Electric Vehicle Routing Problem with Simultaneous Pickup and Delivery.</strong>
-                Yilmaz, Y., Kalayci, C.B.
-                <em>Mathematics</em>, 2022.
-                <a href="https://doi.org/10.3390/math10173108" target="_blank" rel="noreferrer">[DOI]</a>
-              </li>
-            </ol>
-          </section>
-
-          <section
-            id="tab-panel-projects"
-            class="cv-tab-panel"
-            role="tabpanel"
-            aria-labelledby="tab-button-projects"
-            hidden
-          >
-            <h2>Funded Research Projects</h2>
-            <ul>
-              <li>
-                <strong>New Models and Solution Approaches for the Sustainable Partial Disassembly Line Balancing Problem</strong>
-                (TÜBİTAK 1001 Grant, Turkey, 2024-Ongoing). Principal Investigator of a
-                three-year national project on sustainable partial disassembly and optimization.
-              </li>
-              <li>
-                <strong>Developing Efficient Routing Algorithms for Sustainable City Logistics</strong>
-                (TÜBİTAK 1001 Grant, Turkey, 2019-2022). Led the project to design
-                metaheuristic-based routing strategies for eco-friendly urban logistics.
-              </li>
-              <li>
-                <strong>An Integrated Model for the Milk Collection Problem and Development of Efficient Solution Approaches</strong>
-                (TÜBİTAK 3501 Grant, Turkey, 2018-2020). Project researcher; PI: Dr. Olcay Polat.
-              </li>
-              <li>
-                <strong>Determination of Fatigue Behaviors of Micro-Structure Magnesium Alloy Using Heuristic Algorithms</strong>
-                (Pamukkale University Internal Grant, Turkey, 2018-2019). Principal Investigator.
-              </li>
-              <li>
-                <strong>Designing Efficient Algorithms for Cardinality-Constrained Portfolio Optimization</strong>
-                (TÜBİTAK 3501 Grant, Turkey, 2015-2017). Principal Investigator.
-              </li>
-              <li>
-                <strong>Developing Models and Solution Approaches for Vehicle Routing Problems</strong>
-                (Pamukkale University Internal Grant, Turkey, 2015-2016). Principal Investigator.
-              </li>
-              <li>
-                <strong>Solution Approaches for the Feeder Containership Routing Problem</strong>
-                (Pamukkale University Internal Grant, Turkey, 2014-2015). Project researcher; PI: Dr. Olcay Polat.
-              </li>
-              <li>
-                <strong>Solving Vehicle Routing Problems with Simultaneous Pickup and Delivery under Time Limits Using Metaheuristics</strong>
-                (Pamukkale University Internal Grant, Turkey, 2014-2015). Principal Investigator.
-              </li>
-            </ul>
-          </section>
-
-          <section
-            id="tab-panel-experience"
-            class="cv-tab-panel"
-            role="tabpanel"
-            aria-labelledby="tab-button-experience"
-            hidden
-          >
-            <h2>Academic and Professional Experience</h2>
-            <ul>
-              <li>
-                <strong>Associate Dean</strong>,
-                Faculty of Engineering, Pamukkale University, Denizli, Turkey (2021-2022). Led
-                academic planning and quality assurance, and coordinated interdisciplinary collaboration.
-              </li>
-              <li>
-                <strong>Research Consultant</strong>,
-                Zapata Computing, Inc., Boston, MA (2021-2022). Contributed to
-                quantum-inspired combinatorial optimization and hybrid metaheuristic integration.
-              </li>
-              <li>
-                <strong>Teaching Assistant</strong>,
-                College of Engineering, Northeastern University, Boston, MA (2010-2011). Supported
-                optimization and algorithmic course delivery and laboratory activities.
-              </li>
-              <li>
-                <strong>Research Intern</strong>,
-                Cybernetics and AI Lab, Technical University of Košice, Slovakia (Summer 2003).
-                Developed software components for intelligent systems.
-              </li>
-            </ul>
-          </section>
-
-          <section
-            id="tab-panel-teaching"
-            class="cv-tab-panel"
-            role="tabpanel"
-            aria-labelledby="tab-button-teaching"
-            hidden
-          >
-            <h2>Teaching Experience</h2>
-            <ul>
-              <li><strong>ENM 543</strong> - Artificial Intelligence Methodologies in Industrial Engineering</li>
-              <li><strong>IENG 435</strong> - Heuristic Methods in Problem Solving</li>
-              <li><strong>CENG 280</strong> - Programming Basics and Algorithm Design</li>
-              <li><strong>CENG 191</strong> - Introduction to Programming</li>
-              <li><strong>CENG 110</strong> - Intermediate Programming</li>
-              <li><strong>ENM 555</strong> - MATLAB and Applications</li>
-              <li><strong>IENG 473</strong> - Portfolio Optimization</li>
-              <li><strong>ENM 503</strong> - Statistical Experimental Design</li>
-              <li><strong>IENG 217</strong> - Probability and Statistics</li>
-              <li><strong>IENG 426</strong> - Environmentally Conscious Manufacturing</li>
-              <li><strong>MUHY 578</strong> - Management Information Systems</li>
-              <li><strong>IENG 108</strong> - Industrial Engineering Applications</li>
-              <li><strong>MUHF 401</strong> - Case Studies in Engineering</li>
-            </ul>
-
-            <h2>Supervised Theses</h2>
-            <ul>
-              <li>
-                <strong>Yusuf Yılmaz</strong>, Ph.D., Pamukkale University, 2023.
-                <em>Variable Neighborhood Search Algorithms for Solving Electric Vehicle Routing Problems.</em>
-                Role: Primary Advisor.
-              </li>
-              <li>
-                <strong>Mehmet Anıl Akbay</strong>, M.Sc., Pamukkale University, 2019.
-                <em>
-                  A Solution Approach Based on Variable Neighborhood Search Algorithm for
-                  Cardinality-Constrained Portfolio Optimization.
-                </em>
-                Role: Primary Advisor.
-              </li>
-              <li>
-                <strong>Umut Mete</strong>, M.Sc., Pamukkale University, 2019.
-                <em>A Variable Neighborhood Search Approach for Permutation Flow-Shop Scheduling.</em>
-                Role: Primary Advisor.
-              </li>
-              <li>
-                <strong>Sevcan Karagöz</strong>, M.Sc., Pamukkale University, 2019.
-                <em>
-                  Determination of Fatigue Behaviors of Micro-Structure Magnesium Alloy Using
-                  Heuristic Algorithms.
-                </em>
-                Role: Primary Advisor.
-              </li>
-              <li>
-                <strong>Ökkeş Ertenlice</strong>, M.Sc., Pamukkale University, 2018.
-                <em>
-                  An Artificial Bee Colony Algorithm-Based Solution Approach for
-                  Cardinality-Constrained Portfolio Optimization.
-                </em>
-                Role: Primary Advisor.
-              </li>
-              <li>
-                <strong>Can Kaya</strong>, M.Sc., Pamukkale University, 2017.
-                <em>
-                  An Ant Colony System Empowered Variable Neighborhood Search Algorithm for the
-                  Vehicle Routing Problem with Simultaneous Pickup and Delivery.
-                </em>
-                Role: Primary Advisor.
-              </li>
-              <li>
-                <strong>Hasan Akyer</strong>, Ph.D., Pamukkale University, 2016.
-                <em>Heuristic Approaches for Optimal Portfolio Management.</em>
-                Role: Co-Advisor.
-              </li>
-            </ul>
-          </section>
-
-          <section
-            id="tab-panel-service"
-            class="cv-tab-panel"
-            role="tabpanel"
-            aria-labelledby="tab-button-service"
-            hidden
-          >
-            <h2>Academic Service</h2>
-            <ul>
-              <li>
-                <strong>TÜBİTAK Project Evaluator and Panelist</strong>,
-                Department of Industrial Engineering, Pamukkale University (2015-Ongoing).
-                Served as panelist and external referee for over 100 research proposals.
-              </li>
-              <li>
-                <strong>Erasmus+ Departmental Coordinator</strong>,
-                Department of Industrial Engineering, Pamukkale University (2018-Ongoing).
-                Managed Erasmus+ mobility, course equivalency, and student advising processes.
-              </li>
-            </ul>
-
-            <h2>Scholarships and Awards</h2>
-            <ul>
-              <li>Included in the World's Top 2% of Scientists list (Stanford University / Elsevier), 2021-2024.</li>
-              <li>Citation Award recipient at Pamukkale University Annual Prize-Giving Ceremony, 2019.</li>
-              <li>Bronze Medal, Metaheuristics Competition at MESS, Italy, 2018.</li>
-              <li>Fully funded Ph.D. scholarship from Council of Higher Education (YÖK), 2008-2012.</li>
-              <li>Graduated with High Honors, Sakarya University, 2005.</li>
-            </ul>
-
-            <h2>Editorial and Peer Review Activities</h2>
-            <p><strong>Elsevier Journals:</strong></p>
-            <ul>
-              <li>European Journal of Operational Research</li>
-              <li>Computers &amp; Operations Research</li>
-              <li>Computers &amp; Industrial Engineering</li>
-              <li>Journal of Cleaner Production</li>
-              <li>Journal of Manufacturing Systems</li>
-              <li>Applied Soft Computing</li>
-              <li>Knowledge-Based Systems</li>
-              <li>Swarm and Evolutionary Computation</li>
-              <li>Expert Systems with Applications</li>
-              <li>International Journal of Production Economics</li>
-              <li>Engineering Applications of Artificial Intelligence</li>
-              <li>Transportation Research Part B: Methodological</li>
-            </ul>
-
-            <p><strong>Springer Journals:</strong></p>
-            <ul>
-              <li>Annals of Operations Research</li>
-              <li>Financial Innovation</li>
-            </ul>
-
-            <p><strong>Taylor &amp; Francis Journals:</strong></p>
-            <ul>
-              <li>International Journal of Production Research</li>
-            </ul>
-
-            <p><strong>Emerald Journals:</strong></p>
-            <ul>
-              <li>Journal of Manufacturing Technology Management</li>
-            </ul>
-          </section>
-        </div>
+        <h2>Languages</h2>
+        <ul>
+          <li><strong>English:</strong> C1-C2 (Proficient)</li>
+          <li><strong>Turkish:</strong> Native speaker (C2)</li>
+        </ul>
       </article>
     </main>
 
