@@ -12,9 +12,28 @@ Static GitHub Pages site for `cbkalayci.github.io`.
 - `projects/index.html`: funded research projects page
 - `experience/index.html`: academic and professional experience page
 - `service/index.html`: service, editorial activity, and awards page
+- `data/site-data.json`: single source for navigation and sidebar links
+- `data/papers.bib`: publication source used for generated publication blocks
+- `scripts/build-site.mjs`: syncs shared nav/sidebar and generates publications
+- `scripts/check-links.mjs`: internal link checker for CI
+- `.github/workflows/site-checks.yml`: automated HTML/link/build checks
 - `styles.css`: shared minimalist layout and typography
-- `script.js`: footer year
+- `script.js`: footer year, TR/EN toggle, and publication filters
 - `assets/can-b-kalayci-photo.png`: portrait copied from the uploaded Overleaf source
+
+## Generation
+
+```bash
+cd /Users/cbkalayci/Library/CloudStorage/Dropbox/myResearch/myCV/myWebSite/cbkalayci.github.io
+node scripts/build-site.mjs
+```
+
+To verify generated files are in sync:
+
+```bash
+node scripts/build-site.mjs --check
+node scripts/check-links.mjs
+```
 
 ## Local preview
 
