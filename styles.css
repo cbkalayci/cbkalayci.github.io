@@ -126,6 +126,60 @@ a {
   color: var(--muted);
 }
 
+.sidebar .contact-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar .contact-list a::before {
+  content: "L";
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 999px;
+  display: inline-grid;
+  place-items: center;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #ffffff;
+  background: #7b8698;
+  flex-shrink: 0;
+}
+
+.sidebar .contact-list a[href^="mailto:"]::before {
+  content: "@";
+  background: #8d2d48;
+}
+
+.sidebar .contact-list a[href*="pau.edu.tr"]::before {
+  content: "PAU";
+  font-size: 0.48rem;
+  letter-spacing: 0.02em;
+  background: #2a4d7a;
+}
+
+.sidebar .contact-list a[href*="linkedin.com"]::before {
+  content: "in";
+  background: #0a66c2;
+}
+
+.sidebar .contact-list a[href*="scholar.google"]::before {
+  content: "GS";
+  background: #1a73e8;
+}
+
+.sidebar .contact-list a[href*="orcid.org"]::before {
+  content: "ID";
+  background: #a6ce39;
+  color: #1a1f2a;
+}
+
+.sidebar .contact-list a[href*="scopus.com"]::before {
+  content: "Sc";
+  background: #f36f21;
+}
+
 .content {
   padding: 22px 26px;
 }
